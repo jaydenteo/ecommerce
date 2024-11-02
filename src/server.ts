@@ -1,9 +1,10 @@
 import dotenv from "dotenv";
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response } from "express";
 import "express-async-errors";
 import connectDB from "./db/connect";
 import notFoundMiddleware from "./middleware/not-found";
 import errorHandlerMiddleware from "./middleware/error-handler";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const port = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+app.use(morgan("tiny"));
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
